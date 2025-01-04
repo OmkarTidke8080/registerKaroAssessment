@@ -1,4 +1,3 @@
-import Image from "next/image"; // Import the Image component from next/image
 import CompanyList from "./components/CompanyList";
 import pool from "../utils/postgres";
 import stylehub from "../public/stylehub.png";
@@ -51,7 +50,7 @@ async function fetchCompanies(): Promise<Company[]> {
     }>("SELECT * FROM public.companies");
     client.release();
 
-    return result.rows.map((company) => ({
+    return result.rows.map((company: { id: any; name: string | number; tagline: any; headquarters: any; locations: any; details: any; about: any; directors: any; }) => ({
       id: company.id,
       name: company.name,
       tagline: company.tagline,
