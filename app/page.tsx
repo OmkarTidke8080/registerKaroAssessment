@@ -50,17 +50,28 @@ async function fetchCompanies(): Promise<Company[]> {
     }>("SELECT * FROM public.companies");
     client.release();
 
-    return result.rows.map((company: { id: any; name: string | number; tagline: any; headquarters: any; locations: any; details: any; about: any; directors: any; }) => ({
-      id: company.id,
-      name: company.name,
-      tagline: company.tagline,
-      headquarters: company.headquarters,
-      locations: company.locations,
-      details: company.details,
-      about: company.about,
-      directors: company.directors,
-      logo: companyLogos[company.name] || "", // Use the logo from the mapping
-    }));
+    return result.rows.map(
+      (company: {
+        id: number;
+        name: string;
+        tagline: string;
+        headquarters: string;
+        locations: string[];
+        details: string;
+        about: string;
+        directors: string[];
+      }) => ({
+        id: company.id,
+        name: company.name,
+        tagline: company.tagline,
+        headquarters: company.headquarters,
+        locations: company.locations,
+        details: company.details,
+        about: company.about,
+        directors: company.directors,
+        logo: companyLogos[company.name] || "",
+      })
+    );
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
