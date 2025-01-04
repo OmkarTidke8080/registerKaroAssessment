@@ -1,3 +1,4 @@
+import Image from "next/image"; // Import the Image component from next/image
 import CompanyList from "./components/CompanyList";
 import pool from "../utils/postgres";
 import stylehub from "../public/stylehub.png";
@@ -9,45 +10,58 @@ import buildSmart from "../public/buildSmart.png";
 import eduSmart from "../public/eduSmart.png";
 import finSolve from "../public/finSolve.png";
 
+// Define the Company type to ensure correct typing
+interface Company {
+  id: number;
+  name: string;
+  tagline: string;
+  headquarters: string;
+  locations: string[];
+  details: string;
+  about: string;
+  directors: string[];
+  logo: string;
+}
+
+// Define the logo mappings with company names
 const companyLogos: { [key: string]: string } = {
-  StyleHub: stylehub.src, 
-  TechCorp: techCorp.src, 
-  HealthPlus: healthPlus.src, 
-  EcoWorld: ecoWorld.src, 
-  AgriTech: agriTech.src, 
-  BuildSmart: buildSmart.src, 
-  EduSmart: eduSmart.src, 
-  FinSolve: finSolve.src, 
+  StyleHub: stylehub.src,
+  TechCorp: techCorp.src,
+  HealthPlus: healthPlus.src,
+  EcoWorld: ecoWorld.src,
+  AgriTech: agriTech.src,
+  BuildSmart: buildSmart.src,
+  EduSmart: eduSmart.src,
+  FinSolve: finSolve.src,
 };
 
-async function fetchCompanies() {
+// Fetch companies from the database and map them to the required format
+async function fetchCompanies(): Promise<Company[]> {
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT * FROM public.companies");
+    const result = await client.query<{
+      id: number;
+      name: string;
+      tagline: string;
+      headquarters: string;
+      locations: string[];
+      details: string;
+      about: string;
+      directors: string[];
+    }>("SELECT * FROM public.companies");
     client.release();
 
-    return result.rows.map(
-      (company: {
-        id: any;
-        name: any;
-        tagline: any;
-        headquarters: any;
-        locations: any;
-        details: any;
-        about: any;
-        directors: any;
-      }) => ({
-        id: company.id,
-        name: company.name,
-        tagline: company.tagline,
-        headquarters: company.headquarters,
-        locations: company.locations,
-        details: company.details,
-        about: company.about,
-        directors: company.directors,
-        logo: companyLogos[company.name] || "", 
-      })
-    );
+    return result.rows.map((company) => ({
+      id: company.id,
+      name: company.name,
+      tagline: company.tagline,
+      headquarters: company.headquarters,
+      locations: company.locations,
+      details: company.details,
+      about: company.about,
+      directors: company.directors,
+      logo: companyLogos[company.name] || "", // Use the logo from the mapping
+    }));
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];

@@ -43,7 +43,10 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
               <Image
                 src={company.logo}
                 alt={`${company.name} logo`}
+                layout="responsive"
                 className="h-24 w-24 object-contain"
+                width={100}
+                height={100}
               />
             </div>
             {/* Company Name */}
@@ -67,6 +70,9 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
               src={selectedCompany.logo}
               alt={`${selectedCompany.name} logo`}
               className="h-32 w-32 object-contain mb-4"
+              layout="responsive"
+              width={50}
+              height={50}
             />
           </div>
 
