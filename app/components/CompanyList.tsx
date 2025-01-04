@@ -83,7 +83,7 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
 
           {/* Tagline */}
           <p className="italic text-lg text-center text-gray-600 mb-6">
-            "{selectedCompany.tagline}"
+            {selectedCompany.tagline}
           </p>
 
           {/* Headquarters */}
