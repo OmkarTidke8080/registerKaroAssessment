@@ -11,7 +11,7 @@ interface Company {
   locations: string[];
   directors: string[];
   about: string;
-  logo: string; 
+  logo: string;
 }
 
 export default function CompanyList({ companies }: { companies: Company[] }) {
@@ -25,7 +25,8 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
           Companies Registered with
         </h1>
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold opacity-90">
-          <span className="text-blue-800">Register</span><span className="text-yellow-700">Karo.</span>
+          <span className="text-blue-800">Register</span>
+          <span className="text-yellow-700">Karo.</span>
         </h1>
       </div>
 
@@ -39,8 +40,8 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
           >
             {/* Company Logo */}
             <div className="flex justify-center mb-4">
-              <img
-                src={company.logo} 
+              <Image
+                src={company.logo}
                 alt={`${company.name} logo`}
                 className="h-24 w-24 object-contain"
               />
@@ -63,7 +64,7 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
           {/* Company Logo */}
           <div className="flex justify-center mb-6">
             <Image
-              src={selectedCompany.logo} 
+              src={selectedCompany.logo}
               alt={`${selectedCompany.name} logo`}
               className="h-32 w-32 object-contain mb-4"
             />
