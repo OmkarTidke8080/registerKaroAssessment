@@ -9,9 +9,8 @@ import buildSmart from "../public/buildSmart.png";
 import eduSmart from "../public/eduSmart.png";
 import finSolve from "../public/finSolve.png";
 
-// Mapping company names to logo images (imported as StaticImageData)
 const companyLogos: { [key: string]: string } = {
-  StyleHub: stylehub.src, // Use .src for image URL
+  StyleHub: stylehub.src, 
   TechCorp: techCorp.src, 
   HealthPlus: healthPlus.src, 
   EcoWorld: ecoWorld.src, 
@@ -46,7 +45,7 @@ async function fetchCompanies() {
         details: company.details,
         about: company.about,
         directors: company.directors,
-        logo: companyLogos[company.name] || "", // Set logo dynamically based on company name
+        logo: companyLogos[company.name] || "", 
       })
     );
   } catch (error) {

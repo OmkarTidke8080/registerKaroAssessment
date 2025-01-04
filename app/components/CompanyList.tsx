@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 interface Company {
@@ -10,7 +11,7 @@ interface Company {
   locations: string[];
   directors: string[];
   about: string;
-  logo: string; // Logo is a string URL
+  logo: string; 
 }
 
 export default function CompanyList({ companies }: { companies: Company[] }) {
@@ -39,7 +40,7 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
             {/* Company Logo */}
             <div className="flex justify-center mb-4">
               <img
-                src={company.logo} // Use logo as string URL
+                src={company.logo} 
                 alt={`${company.name} logo`}
                 className="h-24 w-24 object-contain"
               />
@@ -61,8 +62,8 @@ export default function CompanyList({ companies }: { companies: Company[] }) {
         <div className="mt-12 w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
           {/* Company Logo */}
           <div className="flex justify-center mb-6">
-            <img
-              src={selectedCompany.logo} // Use logo as string URL
+            <Image
+              src={selectedCompany.logo} 
               alt={`${selectedCompany.name} logo`}
               className="h-32 w-32 object-contain mb-4"
             />
