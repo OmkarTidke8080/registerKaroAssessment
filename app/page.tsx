@@ -8,17 +8,22 @@ async function fetchCompanies() {
     const result = await client.query("SELECT * FROM public.companies");
     client.release();
 
-    return result.rows.map((company) => ({
+    return result.rows.map((company: { id: any; name: any; tagline: any; headquarters: any; locations: any; details: any; about: any; directors: any; }) => ({
       id: company.id,
       name: company.name,
+      tagline: company.tagline,
+      headquarters: company.headquarters,
+      locations: company.locations, 
       details: company.details,
-      directors: company.directors,
+      about: company.about,
+      directors: company.directors, 
     }));
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
   }
 }
+
 
 export default async function Home() {
   const companies = await fetchCompanies();

@@ -1,7 +1,11 @@
 
-export interface Company {
+interface Company {
   id: number;
   name: string;
-  details: string;
+  tagline: string;
+  headquarters: string;
+  locations: string[];
   directors: string[];
+  about: string;
 }
+
